@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>PeopleHR Jobs Widget Example</title>
+</head>
+<body>
+
+<h1>PeopleHR RSS feed widget demo</h1>
+
+<section id="jobs_widget"><noscript>JavaScript is required to view this content</noscript></section>
+
+<script src="../hw-jobs-widget.js"></script>
+<script>
+
+    (() => {
+
+        const htmlTemplateMain = `
+                <div id="hw__jobs_feed__filters_container">
+
+                    <div id="hw__jobs_feed__filter_city_container">
+                        <label for="hw__jobs_feed__filter_city">Filter by:</label>
+
+                        <select id="hw__jobs_feed__filter_city">
+                            <option value="" selected>All Locations</option>
+                            {{ city_options }}
+                        </select>
+                    </div>
+
+                    <div id="hw__jobs_feed__filter_department_container">
+
+                        <select id="hw__jobs_feed__filter_department">
+                            <option value="" selected>All Departments</option>
+                            {{ department_options }}
+                        </select>
+                    </div>
+
+                </div>
+
+                <div id="hw__jobs_feed__jobs_container">
+
+                    <div id="hw__jobs_feed__jobs__no_jobs" style="display: none">
+                        <p>Sorry, there are no jobs available with those parameters.</p>
+                    </div>
+
+                    {{ jobs }}
+
+                </div>
+            `;
+        const htmlTemplateJob = `
+            <article
+                data-hw-jobs-widget-job
+                data-hw-jobs-widget-city="{{ city }}"
+                data-hw-jobs-widget-department="{{ department }}">
+                <h2>
+                    <a href="{{ link }}" target="_blank" rel="noopener">
+                        {{ title }}
+                    </a>
+                </h2>
+                <h3>Summary</h3>
+                <ul>
+                    <li>Location: {{ location }}</li>
+                    <li>Department: {{ department }}</li>
+                    <li>Salary Range: {{ salaryrange }}</li>
+                    <li>Experience: {{ experience }}</li>
+                    <li>City: {{ city }}</li>
+                    <li>Country: {{ country }}</li>
+                    <li>Closing Date: {{ closingdate }}</li>
+                    <li>Company: {{ company }}</li>
+                    <li>Reference: {{ reference }}</li>
+                </ul>
+                <p>{{ description_summary }}</p>
+                <!-- <h3>Description</h3>
+                <p>{{ description_full_html }}</p> -->
+            </article>
+        `;
+
+        hwJobsWidget.init({
+            widgetElementId: 'jobs_widget',
+            feedURL: 'https://ukconnect.peoplehr.net/Pages/JobBoard/CurrentOpenings.aspx?o=a60e9a60-61b2-4f97-a354-2420aff79165',
+            maxJobs: null, // or set to a number
+            htmlTemplateMain: htmlTemplateMain,
+            htmlTemplateJob: htmlTemplateJob,
+            filterDefaultCity: null, // or set to text value matching an available city
+            filterDefaultDepartment: null // or set to text value matching an available department
+        });
+
+        var Webflow = Webflow || [];
+        Webflow.push(function () {
+
+
+            // DOMready has fired
+            // May now use jQuery and Webflow api
+
+
+        });
+
+    })();
+
+</script>
+
+</body>
+</html>
