@@ -175,7 +175,7 @@ const hwJobsWidget = (() => {
         jobElements.forEach((jobEl) => {
 
             let itemVisible = false;
-            //debugger;
+
             if(
                 (!filterCity || (jobEl.dataset.hwJobsWidgetCity === filterCity)) &&
                 (!filterDepartment || (jobEl.dataset.hwJobsWidgetDepartment === filterDepartment))) {
