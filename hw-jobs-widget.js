@@ -279,7 +279,7 @@ const hwJobsWidget = (() => {
     function compileHTMLTemplate(htmlMainTemplate, htmlJobTemplate, jobs, cities, departments) {
 
         // compile HTML for each job
-        const jobsHTML = jobs.map(job => compileHTMLJobs(htmlTemplateJob, job)).join('');
+        const jobsHTML = jobs.map(job => compileHTMLJobs(htmlJobTemplate, job)).join('');
 
         // HTML for city option elements
         const cityOptionsHTML = cities.map(city => (
