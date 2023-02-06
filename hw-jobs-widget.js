@@ -228,29 +228,34 @@ const hwJobsWidget = (() => {
             .then(response => response.json())
             .then(data => {
 
-                data.rss.channel.item.forEach(item => {
+                try {
+                    data.rss.channel.item.forEach(item => {
 
-                    let job = {
-                        title: item.title,
-                        link: item.link,
-                        location: item.location,
-                        department: item.department,
-                        salaryrange: item.salaryrange,
-                        experience: item.experience,
-                        city: item.city,
-                        country: item.country,
-                        closingdate: item.closingdate,
-                        company: item.company,
-                        reference: item.reference,
-                        description_summary: item.vacancydescription,
-                        description_full_html: item.description
-                    };
+                        let job = {
+                            title: item.title,
+                            link: item.link,
+                            location: item.location,
+                            department: item.department,
+                            salaryrange: item.salaryrange,
+                            experience: item.experience,
+                            city: item.city,
+                            country: item.country,
+                            closingdate: item.closingdate,
+                            company: item.company,
+                            reference: item.reference,
+                            description_summary: item.vacancydescription,
+                            description_full_html: item.description
+                        };
 
-                    jobs.push(job);
+                        jobs.push(job);
 
-                });
+                    });
+                }
+                catch(err) {
+                    console.error('Error iterating over jobs in feed. Feed may be empty or malformed.');
+                }
 
-                if(limit && (limit > 0)) {
+                if(limit && (limit > 0) && (jobs.length > 0)) {
                     jobs = jobs.slice(0, (parseInt(limit)));
                 }
 
